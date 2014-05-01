@@ -14,6 +14,9 @@ public class War {
    private Card card1, card2;
    private boolean player1wins = false, player2wins = false;
    
+   /**
+      The default constructor sets up the game
+   **/
    public War()
    {
       //make all the decks
@@ -97,16 +100,7 @@ public class War {
          aWar();
       }
       
-      if(player1.isEmpty() && player1discard.isEmpty())
-      {
-         System.out.println("Player 2 wins.");
-         player2wins = true;
-      }
-      else if(player2.isEmpty() && player2discard.isEmpty())
-      {
-         System.out.println("Player 1 wins.");
-         player1wins = true;
-      }
+      checkForWin();
    }
    
    /**
@@ -127,6 +121,10 @@ public class War {
          main.setct(cards);
          main.shuffle();
       }
+      else
+      {
+         checkForWin();
+      }
    }
    
    /**
@@ -137,9 +135,13 @@ public class War {
       for(int i=0; i<3; i++)
       {
          if(player1.isEmpty())
+         {
             reShuffle(player1, player1discard);
+         }
          if(player2.isEmpty())
+         {
             reShuffle(player2, player2discard);
+         }
             
          stakes.add(player1.dealCard());
          stakes.add(player2.dealCard());
@@ -147,6 +149,26 @@ public class War {
       battle();
    }
    
+   /**
+      the checkForWin method determines if there is a winner
+   **/
+   public void checkForWin()
+   {
+      if(player1.isEmpty() && player1discard.isEmpty())
+      {
+         System.out.println("Player 2 wins.");
+         player2wins = true;
+      }
+      else if(player2.isEmpty() && player2discard.isEmpty())
+      {
+         System.out.println("Player 1 wins.");
+         player1wins = true;
+      }
+   }
+   
+   /**
+      The getWinner method returns the winner
+   **/
    public int getWinner()
    {
       if(player1wins)

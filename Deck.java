@@ -11,6 +11,11 @@ public class Deck
       deck = new Card[CARDS_IN_DECK];
    }
    
+   public void setCount(int count)
+   {
+      ct = count;
+   }
+   
    public void freshDeck()
    {
       for (int r = Card.ACE; r<=Card.KING;r++)
@@ -18,20 +23,30 @@ public class Deck
          for (int s=Card.SPADES;s<=Card.CLUBS;s++)
          {
             deck[ct]=new Card(r,s);
-            ct = ct + 1;
+            ct += 1;
          }
       } 
    }
    
    public Card dealCard()
    {
-      ct--;
-      return deck[ct];
+      try {
+         ct--;
+         return deck[ct];
+      }
+      catch(Exception problem) {
+         return null;
+      }
    }
    
    public Card checkCard()
    {
-      return deck[ct-1];
+      try {
+         return deck[ct-1];
+      }
+      catch(Exception problem) {
+         return null;
+      }
    }
    
    public int cardsRemaining()
@@ -60,8 +75,8 @@ public class Deck
    
    public void add(Card oneCard)
    {
-      ct++;
       deck[ct] = oneCard;
+      ct++;
    }
    
    public void setct(int ct)
