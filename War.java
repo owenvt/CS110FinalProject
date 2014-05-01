@@ -5,14 +5,17 @@
 public class War {
 
    //decks
-   Deck original;
-   Deck player1;
-   Deck player2;
-   Deck player1discard;
-   Deck player2discard;
-   Deck stakes;
+   private Deck original;
+   private Deck player1;
+   private Deck player2;
+   private Deck player1discard;
+   private Deck player2discard;
+   private Deck stakes;
    private Card card1, card2;
    private boolean player1wins = false, player2wins = false;
+   
+   //variables
+   private int player1cardsRemaining, player2cardsRemaining;
    
    /**
       The default constructor sets up the game
@@ -41,14 +44,12 @@ public class War {
    
    /**
       The battle method simulates a turn
-      @param Deck player1
-      @param Deck player2
    **/
    public void battle()
    {
       
-      System.out.println("Cards for player 1: " + (player1.cardsRemaining()+player1discard.cardsRemaining()));
-      System.out.println("Cards for player 2: " + (player2.cardsRemaining()+player2discard.cardsRemaining()));
+      player1cardsRemaining = player1.cardsRemaining() + player1discard.cardsRemaining();
+      player2cardsRemaining = player2.cardsRemaining() + player2discard.cardsRemaining();
          
       if(player1.isEmpty())
       {
@@ -66,7 +67,6 @@ public class War {
       
       if(card1 == null || card2 == null)
       {
-         System.out.println("null");
          if(card1 == null)
          {
             player1.dealCard();
@@ -105,8 +105,8 @@ public class War {
    
    /**
       The reShuffle method recycles the discard pile
-      @param Deck main
-      @param Deck discard
+      @param main
+      @param discard
    **/
    public void reShuffle(Deck main, Deck discard)
    {
@@ -156,12 +156,10 @@ public class War {
    {
       if(player1.isEmpty() && player1discard.isEmpty())
       {
-         System.out.println("Player 2 wins.");
          player2wins = true;
       }
       else if(player2.isEmpty() && player2discard.isEmpty())
       {
-         System.out.println("Player 1 wins.");
          player1wins = true;
       }
    }
@@ -177,6 +175,38 @@ public class War {
          return 2;
       else
          return 0;
+   }
+   
+   /**
+      The getPlayer1cardsRemaining method returns player1cardsRemaining
+   **/
+   public int getPlayer1cardsRemaining()
+   {
+      return player1cardsRemaining;
+   }
+   
+   /**
+      The getPlayer2cardsRemaining method returns player2cardsRemaining
+   **/
+   public int getPlayer2cardsRemaining()
+   {
+      return player2cardsRemaining;
+   }
+   
+   /**
+      The getPlayer1card method returns card1
+   **/
+   public Card getPlayer1card()
+   {
+      return card1;
+   }
+   
+   /**
+      The getPlayer1card method returns card2
+   **/
+   public Card getPlayer2card()
+   {
+      return card2;
    }
            
 }
